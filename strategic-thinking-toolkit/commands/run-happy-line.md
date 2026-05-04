@@ -9,7 +9,7 @@ argument-hint: "[stakeholder or market context, e.g. 'enterprise customers' or '
 Facilitate a structured 60-minute Happy Line session that maps Key Purchasing Criteria (KPCs) against supplier performance, draws the Lazy-L satisfaction curve, and systematically generates N-Post-it ideas from the resulting trade-off zones. Use this command whenever you need to surface what a stakeholder truly values and translate that into concrete strategic options.
 
 ## When to use
-- You are entering a new market and need to diagnose competitive position (see `../skills/strategic-thinking/references/tools/happy-line.md`)
+- You are entering a new market and need to diagnose competitive position (see `../skills/strategic-thinking-toolkit/references/tools/happy-line.md`)
 - You want to generate customer-centric ideas for a product, service, team, or relationship
 - The team has been stuck in analysis; you want to shift from diagnosis to idea generation fast
 - You are running an **Up** phase session and need ideation inputs alongside the Mutation Game (see `run-mutation-game.md`)
@@ -56,7 +56,7 @@ Facilitate a structured 60-minute Happy Line session that maps Key Purchasing Cr
 
 ## Watch out for
 
-Reference the full anti-patterns catalog at `../skills/strategic-thinking/references/anti-patterns/anti-patterns-catalog.md` for phase-specific traps. Key ones for Happy Line sessions:
+Reference the full anti-patterns catalog at `../skills/strategic-thinking-toolkit/references/anti-patterns/anti-patterns-catalog.md` for phase-specific traps. Key ones for Happy Line sessions:
 
 - **HiPPO Curse:** The six-person rotation and collective ownership rule exist specifically to prevent one senior voice from dictating the KPC ranking. Distribute roles explicitly; the diagnostic should be a collective achievement so that nobody is particularly attached to it.
 - **Data-holic:** You do not need real data to have real ideas. A great solution trumps an accurate diagnostic all the time. If the team stalls on data quality, remind them: spend five to ten minutes plotting the Post-its, then spend fifty to fifty-five minutes extracting ideas.
@@ -78,7 +78,7 @@ The session has succeeded when:
 
 ## Notes
 
-- The Happy Line is an **Up phase** tool — it belongs in the ideation and option-generation stage of the Rollercoaster, not in execution. See `../skills/strategic-thinking/references/tools/happy-line.md` for the full Lazy-L curve mechanics, zone definitions, and KPC ranking rules.
+- The Happy Line is an **Up phase** tool — it belongs in the ideation and option-generation stage of the Rollercoaster, not in execution. See `../skills/strategic-thinking-toolkit/references/tools/happy-line.md` for the full Lazy-L curve mechanics, zone definitions, and KPC ranking rules.
 - For validating which ideas to pursue, pair the output of this session with the **Down phase** Payoff Profiles Matrix (`run-payoff-profiles.md`) to assess risk and return profiles of the generated ideas.
 - For market entry contexts, follow the segment drill-down step (Step 8) before generating ideas — find the segment where the incumbent is furthest from the line first.
 - Always prefer testing solutions over validating the diagnostic: spend more money testing solutions than on validating the original diagnostic. Use `design-lean-experiment.md` to design an MVP for the best ideas from this session.

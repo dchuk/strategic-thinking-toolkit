@@ -70,12 +70,12 @@ Ask the user to read the draft diagonally in one second and confirm the core mes
 
 - **Page-count creep** — resist any urge to add a second page; cut bios, shorten body text, or reduce the metrics narrative instead
 - **Single-channel bias** — if the user naturally writes in one NLP channel (often Digital), the draft will feel data-heavy and cold; actively insert at least one Visual and one Kinaesthetic phrase
-- **Vanity metrics** — the three key metrics must be actionable and credible, not impressionistic; see [../skills/strategic-thinking/references/tools/lean-startup.md](../skills/strategic-thinking/references/tools/lean-startup.md) for the distinction between actionable and vanity metrics
+- **Vanity metrics** — the three key metrics must be actionable and credible, not impressionistic; see [../skills/strategic-thinking-toolkit/references/tools/lean-startup.md](../skills/strategic-thinking-toolkit/references/tools/lean-startup.md) for the distinction between actionable and vanity metrics
 - **Missing human element** — a purely analytical one-pager fails the Kinaesthetic and Auditory audience; always include at least one anecdote or human moment per the Two Human Anecdotes principle
 
 ## Notes
 
 - This command is a **Push-phase** tool. It assumes the strategic thinking (Up) and validation (Down) work is complete. If the venture hypotheses are still unvalidated, run `/design-lean-experiment` first.
-- For the underlying NLP channel matching technique used in live pitches, see [../skills/strategic-thinking/references/tools/impactful-words.md](../skills/strategic-thinking/references/tools/impactful-words.md).
-- For the Adland Swagger techniques (three-word summary, one simple visual, two human anecdotes) applied to full presentations, see [../skills/strategic-thinking/references/tools/compelling-story.md](../skills/strategic-thinking/references/tools/compelling-story.md).
+- For the underlying NLP channel matching technique used in live pitches, see [../skills/strategic-thinking-toolkit/references/tools/impactful-words.md](../skills/strategic-thinking-toolkit/references/tools/impactful-words.md).
+- For the Adland Swagger techniques (three-word summary, one simple visual, two human anecdotes) applied to full presentations, see [../skills/strategic-thinking-toolkit/references/tools/compelling-story.md](../skills/strategic-thinking-toolkit/references/tools/compelling-story.md).
 - If the executive summary will anchor a larger deck, build the surrounding pyramid structure first with `/build-pyramid`.

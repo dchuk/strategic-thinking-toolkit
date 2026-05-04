@@ -132,7 +132,7 @@ Ask the user to confirm the summary table looks correct before closing.
 ## Watch out for
 
 - **Reserve Big Bet anti-pattern** — If any initiative is left in the top-right corner at close, the session has failed its primary objective. Do not accept "we'll revisit it" as a resolution.
-- **HiPPO Curse** — If one participant dominates placement votes, call for simultaneous voting (rock-paper-scissors style) to surface genuine team judgment. See [anti-patterns catalog](../skills/strategic-thinking/references/anti-patterns/anti-patterns-catalog.md).
+- **HiPPO Curse** — If one participant dominates placement votes, call for simultaneous voting (rock-paper-scissors style) to surface genuine team judgment. See [anti-patterns catalog](../skills/strategic-thinking-toolkit/references/anti-patterns/anti-patterns-catalog.md).
 - **Data-holic** — Resist requests to spend more than 30 seconds per initiative during the fast round. The goal is relative positioning, not analytical precision.
 - **Pre-spoiling** — Do not explain the Reserve Big Bets penalty before plotting. The organic discovery is the engine of the optimization value (Rule: No Pre-spoiling Reserve Big Bet).
 - **Too many initiatives** — If the list exceeds 15, recommend the digital app at www.strategic.how/payoff and use colour-coding to track Glide Path evolution.
@@ -141,8 +141,8 @@ Ask the user to confirm the summary table looks correct before closing.
 
 ## Notes
 
-- The Payoff Profiles Matrix is a **Down-phase tool** in the Rollercoaster framework. Run it after Up-phase ideation (Pyramid Principle, Happy Line, Mutation Game) has generated candidate initiatives. See [Rollercoaster Framework](../skills/strategic-thinking/references/core/rollercoaster-framework.md).
+- The Payoff Profiles Matrix is a **Down-phase tool** in the Rollercoaster framework. Run it after Up-phase ideation (Pyramid Principle, Happy Line, Mutation Game) has generated candidate initiatives. See [Rollercoaster Framework](../skills/strategic-thinking-toolkit/references/core/rollercoaster-framework.md).
 - **Russian Dolls Quality:** The matrix can be applied recursively — company-wide, then business-unit level, then functional/team level. Consider running multiple nested sessions for large organizations.
 - For Glide Path design on complex initiatives, combine with the Lean Startup experiment workflow to validate intermediate steps before committing. See [design-lean-experiment.md](design-lean-experiment.md).
-- For the full matrix reference including cell definitions, the Four Decisions detail, and the Reserve Big Bet anti-pattern, see [Payoff Profiles reference](../skills/strategic-thinking/references/tools/payoff-profiles.md).
-- For facilitation tips on team sizing, Post-it conventions, and managing contested votes, see [Facilitation Tips](../skills/strategic-thinking/references/topics/facilitation-tips.md).
+- For the full matrix reference including cell definitions, the Four Decisions detail, and the Reserve Big Bet anti-pattern, see [Payoff Profiles reference](../skills/strategic-thinking-toolkit/references/tools/payoff-profiles.md).
+- For facilitation tips on team sizing, Post-it conventions, and managing contested votes, see [Facilitation Tips](../skills/strategic-thinking-toolkit/references/topics/facilitation-tips.md).

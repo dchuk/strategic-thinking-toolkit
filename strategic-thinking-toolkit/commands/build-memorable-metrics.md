@@ -66,8 +66,8 @@ The command has succeeded when:
 
 ## Notes
 - This command covers the **Simple Numbers** tool, which belongs to the **Push phase** of the Rollercoaster framework.
-- For deeper guidance on the Balanced Scorecard, bouncer method, Russian Doll Scorecards, and glide paths, see [`../skills/strategic-thinking/references/tools/simple-numbers.md`](../skills/strategic-thinking/references/tools/simple-numbers.md).
+- For deeper guidance on the Balanced Scorecard, bouncer method, Russian Doll Scorecards, and glide paths, see [`../skills/strategic-thinking-toolkit/references/tools/simple-numbers.md`](../skills/strategic-thinking-toolkit/references/tools/simple-numbers.md).
 - If the session also requires a financial comparison of options, follow up with the Pocket NPV workflow from the same chapter — it pairs naturally with the scorecard to give both non-financial and financial views of the initiative.
-- For the broader Push-phase story structure these metrics will anchor, see [`../skills/strategic-thinking/references/tools/compelling-story.md`](../skills/strategic-thinking/references/tools/compelling-story.md).
-- For anti-pattern detail including Data-holic and the Green-Dashboard Warning, see [`../skills/strategic-thinking/references/anti-patterns/anti-patterns-catalog.md`](../skills/strategic-thinking/references/anti-patterns/anti-patterns-catalog.md).
-- For facilitation tips on running this as a group exercise (team sizing, Post-it use, timeboxing), see [`../skills/strategic-thinking/references/topics/facilitation-tips.md`](../skills/strategic-thinking/references/topics/facilitation-tips.md).
+- For the broader Push-phase story structure these metrics will anchor, see [`../skills/strategic-thinking-toolkit/references/tools/compelling-story.md`](../skills/strategic-thinking-toolkit/references/tools/compelling-story.md).
+- For anti-pattern detail including Data-holic and the Green-Dashboard Warning, see [`../skills/strategic-thinking-toolkit/references/anti-patterns/anti-patterns-catalog.md`](../skills/strategic-thinking-toolkit/references/anti-patterns/anti-patterns-catalog.md).
+- For facilitation tips on running this as a group exercise (team sizing, Post-it use, timeboxing), see [`../skills/strategic-thinking-toolkit/references/topics/facilitation-tips.md`](../skills/strategic-thinking-toolkit/references/topics/facilitation-tips.md).

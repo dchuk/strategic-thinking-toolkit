@@ -44,7 +44,7 @@ argument-hint: "[problem description or file path]"
    - Treating a novel strategic question as a Staircase ("we've done this before") — cite the HiPPO Curse if seniority is driving the assumption.
    - Running a Submarine on a future-oriented question with no data — cite the Data-holic anti-pattern.
    - Stopping at Helicopter without planning a Down-phase validation when stakeholders will demand evidence.
-   See `../skills/strategic-thinking/references/anti-patterns/anti-patterns-catalog.md` for full descriptions.
+   See `../skills/strategic-thinking-toolkit/references/anti-patterns/anti-patterns-catalog.md` for full descriptions.
 
 ---
 
@@ -64,6 +64,6 @@ The diagnosis is complete and correct when:
 
 - The Rollercoaster is the only route that combines both creative (Up) and analytical (Down) phases in that specific order. Reversing the order — running data analysis before generating creative options — is a common failure mode and produces neither Clarity nor Conviction efficiently.
 - The 5% structuring rule applies whenever the Helicopter or Rollercoaster is chosen: invest roughly 5% of total available time reaching a structured set of three or four options before going deeper (`ch06.rule.five-percent-structuring`, `ch06.rule.three-to-four-options`).
-- For a deeper view of what makes a problem truly strategic and the mindset required, see `../skills/strategic-thinking/references/core/strategic-mindset.md`.
-- For a full visual map of all four routes and the Up–Down–Push Rollercoaster phases, see `../skills/strategic-thinking/references/core/rollercoaster-framework.md`.
+- For a deeper view of what makes a problem truly strategic and the mindset required, see `../skills/strategic-thinking-toolkit/references/core/strategic-mindset.md`.
+- For a full visual map of all four routes and the Up–Down–Push Rollercoaster phases, see `../skills/strategic-thinking-toolkit/references/core/rollercoaster-framework.md`.
 - Once the Rollercoaster is confirmed as the right route, use `agents/strategy-planner.md` to sequence the full Up–Down–Push tool chain for the specific challenge.

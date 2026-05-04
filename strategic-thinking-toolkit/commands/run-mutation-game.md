@@ -94,10 +94,10 @@ If any checkpoint is missing, identify which step was incomplete and re-run from
 
 ## Notes
 
-- The Mutation Game is an **Up phase** tool, sitting alongside the Pyramid Principle and Happy Line. Use it when you need to generate options, not evaluate them. See the phase-tool mapping in [../skills/strategic-thinking/SKILL.md](../skills/strategic-thinking/SKILL.md).
-- For the step that selects *which* ideas to take forward into evaluation, use the Payoff Profiles Matrix (a Down phase tool). See [../skills/strategic-thinking/references/tools/payoff-profiles.md](../skills/strategic-thinking/references/tools/payoff-profiles.md).
+- The Mutation Game is an **Up phase** tool, sitting alongside the Pyramid Principle and Happy Line. Use it when you need to generate options, not evaluate them. See the phase-tool mapping in [../skills/strategic-thinking-toolkit/SKILL.md](../skills/strategic-thinking-toolkit/SKILL.md).
+- For the step that selects *which* ideas to take forward into evaluation, use the Payoff Profiles Matrix (a Down phase tool). See [../skills/strategic-thinking-toolkit/references/tools/payoff-profiles.md](../skills/strategic-thinking-toolkit/references/tools/payoff-profiles.md).
 - The app at www.strategic.how/mutation can randomise mutations and save promising combinations for review, approximating true natural selection.
 - For group size, plan for **four to six participants** in a live workshop (group-size rule). Larger groups should be split.
-- For facilitation tips on managing divergent thinking sessions and the Post-it metaphor, see [../skills/strategic-thinking/references/topics/facilitation-tips.md](../skills/strategic-thinking/references/topics/facilitation-tips.md).
-- Full Mutation Game reference (grid rules, unique numbering, demand vs supply description): [../skills/strategic-thinking/references/tools/mutation-game.md](../skills/strategic-thinking/references/tools/mutation-game.md).
-- Anti-patterns relevant to ideation sessions: [../skills/strategic-thinking/references/anti-patterns/anti-patterns-catalog.md](../skills/strategic-thinking/references/anti-patterns/anti-patterns-catalog.md).
+- For facilitation tips on managing divergent thinking sessions and the Post-it metaphor, see [../skills/strategic-thinking-toolkit/references/topics/facilitation-tips.md](../skills/strategic-thinking-toolkit/references/topics/facilitation-tips.md).
+- Full Mutation Game reference (grid rules, unique numbering, demand vs supply description): [../skills/strategic-thinking-toolkit/references/tools/mutation-game.md](../skills/strategic-thinking-toolkit/references/tools/mutation-game.md).
+- Anti-patterns relevant to ideation sessions: [../skills/strategic-thinking-toolkit/references/anti-patterns/anti-patterns-catalog.md](../skills/strategic-thinking-toolkit/references/anti-patterns/anti-patterns-catalog.md).

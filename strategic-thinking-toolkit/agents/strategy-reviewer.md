@@ -120,7 +120,7 @@ Follow these steps on every invocation:
 **Observed signal:** [Direct quote or close paraphrase from the user's input]
 **Corrective principle:** [Book's prescribed fix, stated concisely]
 **Tool:** [Which Up/Down/Push tool addresses this, e.g., "Payoff Profiles Matrix (Down)"]
-**Reference:** `skills/strategic-thinking/references/tools/payoff-profiles.md`
+**Reference:** `skills/strategic-thinking-toolkit/references/tools/payoff-profiles.md`
 
 ### 2. [Anti-Pattern Name] — [Severity]
 ...
@@ -193,16 +193,16 @@ Example: `Lean Startup (Down)` or `Happy Line (Up)`.
 
 Use these paths for the **Reference** field:
 
-- Route selection → `skills/strategic-thinking/references/core/rollercoaster-framework.md`
-- Strategic mindset → `skills/strategic-thinking/references/core/strategic-mindset.md`
-- Pyramid Principle → `skills/strategic-thinking/references/tools/pyramid-principle.md`
-- Happy Line → `skills/strategic-thinking/references/tools/happy-line.md`
-- Mutation Game → `skills/strategic-thinking/references/tools/mutation-game.md`
-- Payoff Profiles → `skills/strategic-thinking/references/tools/payoff-profiles.md`
-- Landscape Analysis → `skills/strategic-thinking/references/tools/landscape-analysis.md`
-- Lean Startup → `skills/strategic-thinking/references/tools/lean-startup.md`
-- Impactful Words → `skills/strategic-thinking/references/tools/impactful-words.md`
-- Simple Numbers → `skills/strategic-thinking/references/tools/simple-numbers.md`
-- Compelling Story → `skills/strategic-thinking/references/tools/compelling-story.md`
-- Facilitation → `skills/strategic-thinking/references/topics/facilitation-tips.md`
-- Full anti-pattern catalog → `skills/strategic-thinking/references/anti-patterns/anti-patterns-catalog.md`
+- Route selection → `skills/strategic-thinking-toolkit/references/core/rollercoaster-framework.md`
+- Strategic mindset → `skills/strategic-thinking-toolkit/references/core/strategic-mindset.md`
+- Pyramid Principle → `skills/strategic-thinking-toolkit/references/tools/pyramid-principle.md`
+- Happy Line → `skills/strategic-thinking-toolkit/references/tools/happy-line.md`
+- Mutation Game → `skills/strategic-thinking-toolkit/references/tools/mutation-game.md`
+- Payoff Profiles → `skills/strategic-thinking-toolkit/references/tools/payoff-profiles.md`
+- Landscape Analysis → `skills/strategic-thinking-toolkit/references/tools/landscape-analysis.md`
+- Lean Startup → `skills/strategic-thinking-toolkit/references/tools/lean-startup.md`
+- Impactful Words → `skills/strategic-thinking-toolkit/references/tools/impactful-words.md`
+- Simple Numbers → `skills/strategic-thinking-toolkit/references/tools/simple-numbers.md`
+- Compelling Story → `skills/strategic-thinking-toolkit/references/tools/compelling-story.md`
+- Facilitation → `skills/strategic-thinking-toolkit/references/topics/facilitation-tips.md`
+- Full anti-pattern catalog → `skills/strategic-thinking-toolkit/references/anti-patterns/anti-patterns-catalog.md`

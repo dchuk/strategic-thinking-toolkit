@@ -151,7 +151,7 @@ A short list (3–5 items) of the highest-impact gaps or risks in the current si
 
 **Exit criterion:** [N] credible options with catchy names on Post-its; inter-meeting memo circulated within 24 hours.
 
-**Reference:** `skills/strategic-thinking/references/tools/happy-line.md`, `skills/strategic-thinking/references/tools/mutation-game.md`, `skills/strategic-thinking/references/tools/pyramid-principle.md`
+**Reference:** `skills/strategic-thinking-toolkit/references/tools/happy-line.md`, `skills/strategic-thinking-toolkit/references/tools/mutation-game.md`, `skills/strategic-thinking-toolkit/references/tools/pyramid-principle.md`
 
 ---
 
@@ -180,7 +180,7 @@ A short list (3–5 items) of the highest-impact gaps or risks in the current si
 
 **Exit criterion:** One option with qualitative ranking + quantitative support + at least one real-life test completed.
 
-**Reference:** `skills/strategic-thinking/references/tools/payoff-profiles.md`, `skills/strategic-thinking/references/tools/landscape-analysis.md`, `skills/strategic-thinking/references/tools/lean-startup.md`
+**Reference:** `skills/strategic-thinking-toolkit/references/tools/payoff-profiles.md`, `skills/strategic-thinking-toolkit/references/tools/landscape-analysis.md`, `skills/strategic-thinking-toolkit/references/tools/lean-startup.md`
 
 ---
 
@@ -202,7 +202,7 @@ A short list (3–5 items) of the highest-impact gaps or risks in the current si
 | 2 | Simple Numbers | Satisfy financial hurdle requirements | Memorable Metrics scorecard (≤12 metrics) |
 | 3 | Compelling Story | Build the end-of-project narrative | Executive flyer with Adland Swagger slogan |
 
-**Reference:** `skills/strategic-thinking/references/tools/impactful-words.md`, `skills/strategic-thinking/references/tools/simple-numbers.md`, `skills/strategic-thinking/references/tools/compelling-story.md`
+**Reference:** `skills/strategic-thinking-toolkit/references/tools/impactful-words.md`, `skills/strategic-thinking-toolkit/references/tools/simple-numbers.md`, `skills/strategic-thinking-toolkit/references/tools/compelling-story.md`
 
 ---
 
@@ -212,7 +212,7 @@ A short list (3–5 items) of the highest-impact gaps or risks in the current si
 |-------------|------------------------|----------------------|
 | [Pattern name] | [Why it's likely here] | [What to do instead] |
 
-**Reference:** `skills/strategic-thinking/references/anti-patterns/anti-patterns-catalog.md`
+**Reference:** `skills/strategic-thinking-toolkit/references/anti-patterns/anti-patterns-catalog.md`
 
 ---
 
