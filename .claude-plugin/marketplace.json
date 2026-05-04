@@ -1,0 +1,29 @@
+{
+  "name": "strategic-thinking-toolkit",
+  "owner": {
+    "name": "franklin"
+  },
+  "metadata": {
+    "description": "A structured strategic thinking plugin based on Fred Pelard's 'How to Be Strategic', providing the Up\u2013Down\u2013Push Rollercoaster framework, ten named strategy tools, and facilitation workflows for tackling complex, future-oriented problems."
+  },
+  "plugins": [
+    {
+      "name": "strategic-thinking-toolkit",
+      "source": "./strategic-thinking-toolkit",
+      "version": "0.1.0",
+      "description": "A structured strategic thinking plugin based on Fred Pelard's 'How to Be Strategic', providing the Up\u2013Down\u2013Push Rollercoaster framework, ten named strategy tools, and facilitation workflows for tackling complex, future-oriented problems.",
+      "tags": [
+        "strategy",
+        "strategic-thinking",
+        "problem-solving",
+        "frameworks",
+        "decision-making",
+        "facilitation",
+        "innovation",
+        "persuasion",
+        "rollercoaster",
+        "up-down-push"
+      ]
+    }
+  ]
+}
