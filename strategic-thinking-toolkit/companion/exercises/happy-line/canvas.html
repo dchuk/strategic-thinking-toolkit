@@ -1,0 +1,169 @@
+<section id="phase-kpc-entry" class="phase" hidden>
+  <h2>Step 1 — Capture Key Purchasing Criteria</h2>
+  <p class="lede">
+    KPCs are what your stakeholder actually decides on. Aim for
+    <strong>6&nbsp;to&nbsp;8</strong> short noun phrases — bias to outcomes,
+    not features. <span class="muted">("Onboarding speed" beats "self-serve wizard".)</span>
+  </p>
+
+  <form id="kpc-form" class="kpc-input">
+    <input id="kpc-text" type="text" autocomplete="off" maxlength="120"
+           placeholder="e.g. Onboarding speed" />
+    <button type="submit" class="primary">Add</button>
+  </form>
+
+  <ul id="kpc-list" class="kpc-list"></ul>
+
+  <div class="phase-footer">
+    <span id="kpc-counter" class="muted">0 / 6&ndash;8 KPCs</span>
+    <button id="advance-rank" class="primary" disabled>
+      Continue to ranking →
+    </button>
+  </div>
+</section>
+
+<section id="phase-rank" class="phase" hidden>
+  <h2>Step 2 — Rank by importance</h2>
+  <p class="lede">
+    Drag the most important KPC to the top. Order represents stakeholder
+    priorities — what they'd be most upset to lose.
+  </p>
+
+  <ol id="rank-list" class="rank-list"></ol>
+
+  <div class="phase-footer">
+    <button id="back-to-entry">← Back</button>
+    <button id="advance-rate" class="primary">Continue to rating →</button>
+  </div>
+</section>
+
+<section id="phase-rate" class="phase" hidden>
+  <h2>Step 3 — Rate satisfaction</h2>
+  <p class="lede">
+    Drag each KPC <strong>left or right</strong> to mark how satisfied your
+    stakeholder is with the current state.
+  </p>
+  <p class="lede zone-key">
+    <span class="zone-pill front">Front</span>
+    <span>important &amp; unsatisfied — <em>strategic priority</em></span>
+    <span class="zone-pill top">Top</span>
+    <span>important &amp; satisfied — <em>defend</em></span>
+    <span class="zone-pill back">Back</span>
+    <span>low importance — <em>back-burner</em></span>
+  </p>
+
+  <div class="plot-wrap">
+    <svg id="plot" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet"
+         role="img" aria-label="Happy Line plot">
+      <defs>
+        <pattern id="grid" x="60" y="20" width="70" height="44" patternUnits="userSpaceOnUse">
+          <path d="M70 0 H0 V44" fill="none" stroke="#e5e7eb" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+
+      <rect class="zone front" x="60"  y="20"  width="350" height="220"></rect>
+      <rect class="zone top"   x="410" y="20"  width="350" height="220"></rect>
+      <rect class="zone back"  x="60"  y="240" width="700" height="220"></rect>
+
+      <rect x="60" y="20" width="700" height="440" fill="url(#grid)" pointer-events="none"></rect>
+
+      <line x1="60"  y1="20"  x2="60"  y2="460" stroke="#9ca3af" stroke-width="1"/>
+      <line x1="60"  y1="460" x2="760" y2="460" stroke="#9ca3af" stroke-width="1"/>
+      <line x1="410" y1="20"  x2="410" y2="460" stroke="#cbd5e1" stroke-dasharray="2 4"/>
+      <line x1="60"  y1="240" x2="760" y2="240" stroke="#cbd5e1" stroke-dasharray="2 4"/>
+
+      <text x="34"  y="240" transform="rotate(-90 34 240)" text-anchor="middle" class="axis-label">Importance</text>
+      <text x="410" y="500" text-anchor="middle" class="axis-label">Satisfaction</text>
+      <text x="56"  y="28"  text-anchor="end" class="axis-tick">High</text>
+      <text x="56"  y="463" text-anchor="end" class="axis-tick">Low</text>
+      <text x="60"  y="478" class="axis-tick">Unsatisfied</text>
+      <text x="760" y="478" text-anchor="end" class="axis-tick">Satisfied</text>
+
+      <path id="lazy-l" fill="none" stroke="#2563eb" stroke-width="2"
+            stroke-dasharray="6 4" pointer-events="none"/>
+
+      <g id="bubbles"></g>
+    </svg>
+  </div>
+
+  <div class="phase-footer">
+    <button id="back-to-rank">← Back</button>
+    <button id="advance-ideate" class="primary">Continue to ideas →</button>
+  </div>
+</section>
+
+<section id="phase-ideate" class="phase" hidden>
+  <h2>Step 4 — Generate ideas in four boxes</h2>
+  <p class="lede">
+    Type an idea and click the KPC letters it would move. Ideas auto-file
+    into the box matching the number of KPCs they touch — ideas that move
+    more KPCs at once are subtler and more likely to win.
+  </p>
+
+  <form id="idea-form" class="idea-input">
+    <input id="idea-text" type="text" maxlength="200"
+           placeholder="e.g. One less train daily" autocomplete="off" />
+    <div id="idea-kpc-chips" class="kpc-chip-row" aria-label="Tap KPCs this idea moves"></div>
+    <div class="idea-input-footer">
+      <span id="idea-tag-count" class="muted">Pick at least 1 KPC</span>
+      <button type="submit" class="primary" disabled>Add idea</button>
+    </div>
+  </form>
+
+  <div class="quadrants">
+    <div class="quadrant" data-n="1">
+      <header><span class="qn">1</span>-Post-it<span class="qsubtitle">moves one KPC</span></header>
+      <ul class="idea-list" data-n="1"></ul>
+    </div>
+    <div class="quadrant" data-n="2">
+      <header><span class="qn">2</span>-Post-its<span class="qsubtitle">trade off two KPCs</span></header>
+      <ul class="idea-list" data-n="2"></ul>
+    </div>
+    <div class="quadrant" data-n="3">
+      <header><span class="qn">3</span>-Post-its<span class="qsubtitle">three-way combination</span></header>
+      <ul class="idea-list" data-n="3"></ul>
+    </div>
+    <div class="quadrant" data-n="4">
+      <header><span class="qn">4+</span>-Post-its<span class="qsubtitle">transformative</span></header>
+      <ul class="idea-list" data-n="4"></ul>
+    </div>
+  </div>
+
+  <div class="phase-footer">
+    <button id="back-to-rate">← Back</button>
+    <span id="ideate-counter" class="muted">0 ideas</span>
+    <button id="advance-shortlist" class="primary" disabled>Continue to shortlist →</button>
+  </div>
+</section>
+
+<section id="phase-shortlist" class="phase" hidden>
+  <h2>Step 5 — Shortlist your top 3</h2>
+  <p class="lede">
+    Star up to 3 ideas. Prefer ideas that move multiple KPCs at once — they
+    address more problems for the same investment.
+  </p>
+
+  <ul id="shortlist-list" class="shortlist-list"></ul>
+
+  <div class="phase-footer">
+    <button id="back-to-ideate">← Back</button>
+    <span id="shortlist-counter" class="muted">0 of 3 starred</span>
+    <button id="advance-done" class="primary" disabled>Finish session →</button>
+  </div>
+</section>
+
+<section id="phase-done" class="phase" hidden>
+  <h2>Session complete</h2>
+  <p class="lede">
+    Tell Claude <strong>"synthesize the session"</strong> (or "write the
+    deliverable") and Claude will read the final canvas state and produce a
+    markdown summary in <code>./strategic-sessions/</code>.
+  </p>
+
+  <div id="done-summary" class="done-summary"></div>
+
+  <div class="phase-footer">
+    <button id="back-to-shortlist">← Edit shortlist</button>
+    <span class="muted">Server self-cleans after 30 min idle.</span>
+  </div>
+</section>

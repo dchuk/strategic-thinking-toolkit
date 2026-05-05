@@ -1,0 +1,214 @@
+/* Happy Line canvas styles. Scoped via section IDs to avoid leaking. */
+
+.phase { animation: phase-fade 180ms ease-out; }
+@keyframes phase-fade { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: none; } }
+
+h2 { margin: 0 0 8px; font-size: 22px; font-weight: 600; }
+p.lede { margin: 0 0 18px; color: #4b5563; max-width: 760px; }
+.muted { color: var(--muted); font-size: 13px; }
+
+.phase-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-top: 28px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- phase 1 — entry ---------- */
+
+.kpc-input { display: flex; gap: 8px; margin-bottom: 16px; }
+.kpc-input input {
+  flex: 1; padding: 8px 12px; font: inherit;
+  border: 1px solid var(--border); border-radius: 6px; background: #fff;
+}
+.kpc-input input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.kpc-input input:disabled { background: #f3f4f6; }
+
+.kpc-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.kpc-list li {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff; border: 1px solid var(--border); border-radius: 999px;
+  padding: 4px 4px 4px 10px;
+}
+.kpc-list .letter,
+.rank-list .letter,
+#plot text.letter {
+  font-weight: 700; font-size: 12px; letter-spacing: 0.5px;
+}
+.kpc-list .letter, .rank-list .letter {
+  color: var(--accent); padding: 2px 7px;
+  background: #eff6ff; border-radius: 999px;
+}
+.kpc-list .remove {
+  background: none; border: 0; color: var(--muted); cursor: pointer;
+  font-size: 18px; line-height: 1; padding: 2px 8px; border-radius: 999px;
+}
+.kpc-list .remove:hover { color: #dc2626; background: #fee2e2; }
+
+/* ---------- phase 2 — rank ---------- */
+
+.rank-list { list-style: none; padding: 0; margin: 0; max-width: 600px; }
+.rank-list li {
+  display: flex; align-items: center; gap: 12px;
+  background: #fff; border: 1px solid var(--border); border-radius: 6px;
+  padding: 10px 14px; margin-bottom: 6px;
+  cursor: grab; user-select: none;
+}
+.rank-list li:hover { border-color: #d1d5db; }
+.rank-list li.dragging { opacity: 0.4; }
+.rank-list li.drop-before { box-shadow: 0 -2px 0 var(--accent) inset; }
+.rank-list li.drop-after  { box-shadow: 0 2px 0 var(--accent) inset; }
+.rank-list .rank { font-weight: 600; color: var(--muted); width: 24px; }
+.rank-list .label { flex: 1; }
+.rank-list .handle { color: var(--muted); margin-left: auto; font-size: 18px; }
+
+/* ---------- phase 3 — rate / plot ---------- */
+
+.zone-key { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 13px; }
+.zone-pill {
+  padding: 1px 10px; border-radius: 999px; font-weight: 600;
+  display: inline-block; margin-right: 4px;
+}
+.zone-pill.front { background: var(--front); color: #78350f; }
+.zone-pill.top   { background: var(--top);   color: #065f46; }
+.zone-pill.back  { background: var(--back);  color: #374151; }
+
+.plot-wrap {
+  background: #fff; border: 1px solid var(--border); border-radius: 8px;
+  padding: 12px;
+}
+#plot { width: 100%; height: auto; display: block; touch-action: none; }
+
+#plot .zone.front { fill: var(--front); fill-opacity: 0.45; }
+#plot .zone.top   { fill: var(--top);   fill-opacity: 0.45; }
+#plot .zone.back  { fill: var(--back);  fill-opacity: 0.55; }
+
+#plot .axis-label { font-size: 12px; fill: var(--muted); font-weight: 500; }
+#plot .axis-tick  { font-size: 11px; fill: var(--muted); }
+
+#plot .bubble { cursor: grab; }
+#plot .bubble:active { cursor: grabbing; }
+#plot .bubble circle {
+  fill: #fff; stroke: var(--accent); stroke-width: 2;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
+  transition: stroke-width 80ms;
+}
+#plot .bubble.dragging circle {
+  stroke: #1e40af; stroke-width: 3;
+}
+#plot .bubble text.letter { fill: var(--accent); font-size: 14px; pointer-events: none; }
+#plot .bubble text.label  { fill: #111827; font-size: 12px; pointer-events: none; }
+
+/* ---------- phase 4 — ideate ---------- */
+
+.idea-input {
+  background: #fff; border: 1px solid var(--border); border-radius: 8px;
+  padding: 12px 14px; margin-bottom: 18px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.idea-input input {
+  width: 100%; padding: 8px 12px; font: inherit;
+  border: 1px solid var(--border); border-radius: 6px; background: #fff;
+}
+.idea-input input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+.kpc-chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.kpc-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 999px;
+  border: 1px solid var(--border); background: #fff;
+  cursor: pointer; user-select: none; font-size: 13px;
+  transition: background 100ms, border-color 100ms;
+}
+.kpc-chip:hover { border-color: var(--accent); }
+.kpc-chip.selected { background: #eff6ff; border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.kpc-chip .ck-letter { font-weight: 700; }
+
+.idea-input-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+
+.quadrants {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 720px) { .quadrants { grid-template-columns: 1fr; } }
+
+.quadrant {
+  background: #fff; border: 1px solid var(--border); border-radius: 8px;
+  padding: 12px 14px;
+  display: flex; flex-direction: column; min-height: 140px;
+}
+.quadrant header {
+  display: flex; align-items: baseline; gap: 8px;
+  font-weight: 600; font-size: 14px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px dashed var(--border);
+}
+.quadrant header .qn {
+  display: inline-block; min-width: 22px; text-align: center;
+  background: #eff6ff; color: var(--accent);
+  padding: 1px 8px; border-radius: 999px; font-size: 13px;
+}
+.quadrant header .qsubtitle { font-weight: 400; color: var(--muted); font-size: 12px; }
+.quadrant[data-n="1"] header .qn { background: #fef3c7; color: #92400e; }
+.quadrant[data-n="2"] header .qn { background: #ddd6fe; color: #5b21b6; }
+.quadrant[data-n="3"] header .qn { background: #cffafe; color: #155e75; }
+.quadrant[data-n="4"] header .qn { background: #dcfce7; color: #14532d; }
+
+.idea-list {
+  list-style: none; padding: 0; margin: 0; flex: 1;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.idea-list li {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px;
+  background: #fafafa;
+}
+.idea-list li .text { flex: 1; }
+.idea-list li .tags { font-size: 11px; color: var(--accent); font-weight: 600; letter-spacing: 0.5px; }
+.idea-list li .star {
+  background: none; border: 0; cursor: pointer; font-size: 16px; line-height: 1;
+  color: var(--muted); padding: 0 4px;
+}
+.idea-list li .star.on { color: #d97706; }
+.idea-list li .remove {
+  background: none; border: 0; cursor: pointer; color: var(--muted);
+  font-size: 16px; line-height: 1; padding: 0 4px;
+}
+.idea-list li .remove:hover { color: #dc2626; }
+.idea-list:empty::before {
+  content: "—"; color: #d1d5db; font-size: 14px;
+}
+
+/* ---------- phase 5 — shortlist ---------- */
+
+.shortlist-list { list-style: none; padding: 0; margin: 0; max-width: 720px; }
+.shortlist-list li {
+  display: flex; align-items: center; gap: 12px;
+  background: #fff; border: 1px solid var(--border); border-radius: 6px;
+  padding: 10px 14px; margin-bottom: 6px;
+}
+.shortlist-list li.starred { border-color: #d97706; background: #fffbeb; }
+.shortlist-list .star {
+  background: none; border: 0; cursor: pointer; font-size: 22px; line-height: 1;
+  color: #d1d5db; padding: 0 4px;
+}
+.shortlist-list .star.on { color: #d97706; }
+.shortlist-list .star.disabled { cursor: not-allowed; opacity: 0.3; }
+.shortlist-list .text { flex: 1; }
+.shortlist-list .meta { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.shortlist-list .tags { color: var(--accent); font-weight: 600; }
+
+/* ---------- phase done ---------- */
+
+.done-summary {
+  background: #fff; border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px 18px; max-width: 720px;
+}
+.done-summary h3 { margin: 12px 0 6px; font-size: 14px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.done-summary h3:first-child { margin-top: 0; }
+.done-summary ul { padding-left: 18px; margin: 4px 0; }
+.done-summary .star { color: #d97706; }

@@ -1,7 +1,6 @@
 ---
 name: strategic-thinking-toolkit
-description: >
-  A facilitator-oriented toolkit for applying the Up–Down–Push Rollercoaster of Strategic Thinking from Fred Pelard's *How to Be Strategic*. Use this skill when reviewing a strategic plan, running an ideation or elimination session, designing a Lean experiment, building a Pyramid Principle structure, or evaluating whether a problem is truly strategic. Trigger phrases: "is this problem strategic?", "help me generate options", "which tool should I use?", "review my strategy", "build a scorecard", "write an executive summary".
+description: A facilitator-oriented toolkit for applying the Up–Down–Push Rollercoaster of Strategic Thinking from Fred Pelard's *How to Be Strategic*. Use when reviewing a strategic plan, running an ideation or elimination session, designing a Lean experiment, building a Pyramid Principle structure, or evaluating whether a problem is truly strategic. Trigger phrases - is this problem strategic?, help me generate options, which tool should I use?, review my strategy, build a scorecard, write an executive summary.
 allowed-tools:
   - Grep
   - Glob
@@ -162,6 +161,7 @@ The Rollercoaster has three phases. Every tool belongs to exactly one phase.
 | File | Description |
 |---|---|
 | [Facilitation Tips](references/topics/facilitation-tips.md) | Third Solution principle; team sizing (small for Up, large for Down); Post-it vs presentation norms |
+| [Visual Companion](references/topics/visual-companion.md) | Optional local web canvas for spatial exercises; launch protocol, state schema, turn-by-turn facilitation. Currently supports Happy Line phases 1–3. |
 
 ### Anti-Patterns
 | File | Description |

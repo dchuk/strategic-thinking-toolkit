@@ -105,6 +105,44 @@ The plugin also ships the **strategic-thinking-toolkit** skill ([`skills/strateg
 
 ---
 
+## Visual companion (experimental)
+
+Some exercises have a 2D shape that markdown can't fully convey — a
+plotted curve, a portfolio matrix, a mutation grid. The toolkit ships an
+opt-in local web canvas for those: when you run a supported command,
+Claude offers to launch it; if you accept, a Node server starts on a
+random localhost port and serves an interactive page you drive in the
+browser while Claude observes from chat and writes the final synthesis.
+
+**Currently supports:** Happy Line (full flow — KPC entry, ranking,
+satisfaction rating, idea generation in four quadrants, shortlist
+starring, done state, synthesis deliverable).
+
+**Requirements:** Node 18+ on `PATH`. No `npm install`, no global
+state — everything lives under `./strategic-sessions/.companion/<id>/`
+in your working dir.
+
+**Try it:**
+
+```text
+/strategic-thinking-toolkit:run-happy-line "early-stage SaaS buyers"
+```
+
+When Claude asks whether to use the companion, say yes. Claude will
+print a `http://127.0.0.1:<port>/` URL — open it in your browser. The
+final markdown deliverable lands in `./strategic-sessions/`. The server
+self-cleans 30 min after the last interaction or when Claude Code
+exits.
+
+If you decline (or don't have Node), the command falls back to the
+existing markdown facilitation flow with no loss of fidelity.
+
+See [`companion/README.md`](companion/README.md) for the architecture
+and [`references/topics/visual-companion.md`](skills/strategic-thinking-toolkit/references/topics/visual-companion.md)
+for Claude's playbook.
+
+---
+
 ## Reference library
 
 13 reference files distil the book into structured, machine-readable form. They are read by the commands and agents, and you can read them directly too.
@@ -130,6 +168,7 @@ The plugin also ships the **strategic-thinking-toolkit** skill ([`skills/strateg
 
 ### Topics
 - [`references/topics/facilitation-tips.md`](skills/strategic-thinking-toolkit/references/topics/facilitation-tips.md) — Third Solution principle, team sizing (small for Up, large for Down), Post-it vs presentation norms, standing rule, Dots Voting.
+- [`references/topics/visual-companion.md`](skills/strategic-thinking-toolkit/references/topics/visual-companion.md) — opt-in local web canvas for spatial exercises; launch protocol, state schema, turn-by-turn facilitation, synthesis instructions. Currently supports the full Happy Line flow.
 
 ### Anti-patterns
 - [`references/anti-patterns/anti-patterns-catalog.md`](skills/strategic-thinking-toolkit/references/anti-patterns/anti-patterns-catalog.md) — every named anti-pattern from the book, organised by phase (Think / Up / Down / Push / Again) with corrective principles.

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Strategic Thinking Toolkit — Visual Companion</title>
+  <link rel="stylesheet" href="/canvas.css" />
+  <style>
+    :root {
+      --bg: #fafaf7;
+      --ink: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --front: #fde68a;
+      --top: #bbf7d0;
+      --back: #e5e7eb;
+      --accent: #2563eb;
+      --warn: #b45309;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.4;
+    }
+    header.companion-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 20px;
+      background: #111827; color: #fff;
+    }
+    header.companion-header .title { font-weight: 600; letter-spacing: 0.2px; }
+    header.companion-header .context { font-size: 13px; opacity: 0.65; }
+    .companion-status {
+      font-size: 12px; padding: 6px 20px;
+      background: #fef3c7; color: #92400e; border-bottom: 1px solid #fde68a;
+    }
+    .companion-status[data-ok="1"] { background: #ecfdf5; color: #065f46; border-bottom-color: #a7f3d0; }
+    main.companion-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+    }
+    .annotations {
+      position: fixed; right: 16px; bottom: 16px;
+      width: 320px; max-height: 50vh; overflow: auto;
+      display: flex; flex-direction: column-reverse; gap: 8px;
+      pointer-events: none;
+    }
+    .annotation {
+      pointer-events: auto;
+      background: #fffbeb; border: 1px solid #fcd34d; color: #78350f;
+      border-radius: 6px; padding: 8px 10px; font-size: 13px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .annotation .from { font-weight: 600; font-size: 11px; opacity: 0.7; margin-bottom: 2px; }
+    button {
+      font: inherit; padding: 6px 12px; border-radius: 6px;
+      border: 1px solid var(--border); background: #fff; color: var(--ink);
+      cursor: pointer;
+    }
+    button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <header class="companion-header">
+    <span class="title">Strategic Thinking — <span id="exercise-name"><!--EXERCISE--></span></span>
+    <span class="context"><!--CONTEXT--></span>
+  </header>
+  <div class="companion-status" id="connection-status">Connecting…</div>
+  <main class="companion-shell">
+    <!--CANVAS-->
+  </main>
+  <aside class="annotations" id="annotations"></aside>
+  <script src="/helper.js"></script>
+  <script src="/client-bridge.js"></script>
+  <script>
+    // Render incoming annotations as toast cards.
+    window.companion.onAnnotation(function (a) {
+      var box = document.getElementById('annotations');
+      if (!box) return;
+      var el = document.createElement('div');
+      el.className = 'annotation';
+      var from = document.createElement('div');
+      from.className = 'from';
+      from.textContent = (a.from || 'claude').toUpperCase() + (a.target ? ' · ' + a.target : '');
+      var body = document.createElement('div');
+      body.textContent = a.text || '';
+      el.appendChild(from); el.appendChild(body);
+      box.prepend(el);
+    });
+  </script>
+  <script src="/canvas.js"></script>
+</body>
+</html>

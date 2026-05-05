@@ -15,6 +15,26 @@ Facilitate a structured 60-minute Happy Line session that maps Key Purchasing Cr
 - You are running an **Up** phase session and need ideation inputs alongside the Mutation Game (see `run-mutation-game.md`)
 - You suspect the team is over-investing in less-important criteria (Top Zone) while under-delivering on what customers care about most (Front Zone)
 
+## Visual companion (recommended)
+
+Happy Line is a 2D exercise — KPCs plotted on importance × satisfaction
+axes, with a Lazy-L curve emerging as the user drags them. The plugin
+ships an optional local web canvas that runs the whole session
+spatially: KPC entry → ranking → satisfaction rating → idea generation
+in four quadrants → shortlist → done. You facilitate from chat
+(observing, prompting, posting annotations) and write the synthesis
+deliverable when the user finishes.
+
+Offer it at the very start of the session:
+
+> "Happy Line has an interactive 2D plot you can drag KPCs on directly.
+> Want me to launch it as a local web app, or run it as text?"
+
+- **If accepted:** read `../skills/strategic-thinking-toolkit/references/topics/visual-companion.md` for the launch protocol, state schema, turn-by-turn facilitation guidance, and synthesis instructions. The companion replaces steps 3–6 below. Step 1 (gather context), step 2 (briefly set the scene), and steps 7–8 (optional individual diagnostics, segment drill-down) still run in chat as written.
+- **If declined or the launcher fails:** proceed with the markdown facilitation in steps 1–8 below. Don't relaunch attempts after a single failure — fall back gracefully.
+
+Decide once at the start. Don't switch modes mid-session.
+
 ## Steps
 
 1. **Gather context.** Ask the user: "Who is Stakeholder X for this session — customers, employees, a specific boss, a market segment?" If a file, brief, or research document exists, read it now using the Read tool. If the user has supplied a path, read that file; otherwise proceed with what the user has stated.
@@ -24,7 +44,7 @@ Facilitate a structured 60-minute Happy Line session that maps Key Purchasing Cr
    - Bottom half: four quadrants labelled 1, 2, 3, 4+ (for N-Post-it idea generation).
    - Remind the team: **do NOT draw the Lazy-L yet** — that comes after KPCs are ranked and performance is plotted.
 
-3. **Assess Stakeholder X — KPC identification and ranking (10 min).** Walk the user through the six-person rotation. If the session is solo or virtual, simulate each role in sequence:
+3. **Assess Stakeholder X — KPC identification and ranking (10 min).** *If the visual companion is active: the user does this in the browser (phases `kpc-entry` and `rank` of the canvas). Read `canvas.json` each turn, comment on what they entered, suggest KPCs they might be missing for the stakeholder context, and gently flag feature-named entries. Don't recite the role rotation — the canvas IS the facilitation. Skip to step 5 once `phase=rate` and bubbles have been placed.* Otherwise, walk the user through the six-person rotation. If the session is solo or virtual, simulate each role in sequence:
    - **Person 1:** Generate 10–12 KPCs on Post-its (team contributes freely).
    - **Person 2:** Review the list; may change up to two Post-its.
    - **Person 3:** Rank KPCs in decreasing order of importance; eliminate the least important to keep **six to eight**. Apply Rule: most important KPC goes on the far left.
@@ -34,13 +54,13 @@ Facilitate a structured 60-minute Happy Line session that maps Key Purchasing Cr
    - **Label** each Post-it with a letter (a, b, c, …) in its bottom-right corner.
    - Remind the team: do not merge two high-importance KPCs into one; instead check whether any top-four or top-five KPC contains a sub-criterion important enough to spin off separately.
 
-4. **Draw the Happy Line.** Place the Lazy-L inflection so it broadly splits the Post-its into **two batches of roughly equal importance**. Aim for version 3 or 4 out of 5 on the placement spectrum. Do not force every Post-it above or below — the split should maximise available trade-offs.
+4. **Draw the Happy Line.** *If the visual companion is active: the Lazy-L curve and three zones render automatically as the user drags bubbles in canvas phase `rate`. Your job is to read the emerging shape from `canvas.json` and call it out — name the Front Zone KPCs (high importance, low satisfaction) by letter, flag Premature Satisfaction if everything sits in Top Zone, and push annotations via `POST /annotate` for the most important callouts. Do not ask the user to draw the line manually.* Otherwise, place the Lazy-L inflection so it broadly splits the Post-its into **two batches of roughly equal importance**. Aim for version 3 or 4 out of 5 on the placement spectrum. Do not force every Post-it above or below — the split should maximise available trade-offs.
    - Identify the three zones aloud:
      - **Front Zone** (bottom-left): most important KPCs, underperforming — the strategy zone.
      - **Top Zone** (top-right): less important KPCs, over-delivering — the marketing zone / resource reservoir.
      - **Back Zone** (bottom-right): less important KPCs, underperforming — generate ideas here without compromising more critical criteria.
 
-5. **Generate N-Post-it ideas (30 min).** Use the four quadrants in the bottom half of the flipchart:
+5. **Generate N-Post-it ideas (30 min).** *If the visual companion is active: the user does this in the browser (canvas phase `ideate`). Each idea auto-files into a 1/2/3/4+ quadrant based on how many KPC chips the user tags. Read `canvas.json:ideas` each turn and prompt for missing quadrants — flag any idea that doesn't move clockwise (Top Zone moves down → Front Zone moves up). Skip to the synthesis step in the playbook once `phase=shortlist`.* Use the four quadrants in the bottom half of the flipchart:
    - **Box 1 — 1-Post-it ideas:** Invent three to four ideas that move the single most critical Front Zone KPC up toward the line. Each idea moves exactly one Post-it.
    - **Box 2 — 2-Post-its ideas:** Invent three to four ideas that trade off a Top Zone KPC (moves it slightly down) to fund improvement of a Front Zone KPC (moves it up). This is a clockwise movement on the graph.
    - **Box 3 — 3-Post-its ideas:** Extend to combinations involving three KPCs.
@@ -48,7 +68,7 @@ Facilitate a structured 60-minute Happy Line session that maps Key Purchasing Cr
    - Write each idea on a **different-colour Post-it** from the KPC Post-its. Include in brackets the letters of the KPCs the idea alters (e.g. "One less train daily (a, e)").
    - Validate each idea: it must make Post-its move **clockwise** — Front Zone criteria go up; Top Zone criteria may go slightly down. Reject any idea that violates this rule.
 
-6. **Package best ideas (15 min).** Summarise the strongest ideas in **two to four words each**. Include the component KPC letters in brackets. Prompt the user: "Which ideas address the most Post-its at once? Those are your highest-priority candidates."
+6. **Package best ideas (15 min).** *If the visual companion is active: the user stars up to 3 ideas in canvas phase `shortlist`. When `phase=done`, run the synthesis step from the playbook — Claude rephrases the starred ideas into 2–4 word labels in the deliverable, with the linked KPC letters in brackets. Don't ask the user to repackage ideas in chat; the canvas state plus the synthesis pass is the deliverable.* Otherwise, summarise the strongest ideas in **two to four words each**. Include the component KPC letters in brackets. Prompt the user: "Which ideas address the most Post-its at once? Those are your highest-priority candidates."
 
 7. **Optional — individual diagnostics.** After the group session, ask each team member to independently produce their own version of the diagnostic on a separate flipchart. Extract ideas from each version. Note which ideas appear across multiple versions — these are the most robust because good ideas address many problems at once.
 
