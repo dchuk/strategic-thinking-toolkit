@@ -26,12 +26,19 @@
     bubbles:           $('bubbles'),
     lazyL:             $('lazy-l'),
     plot:              $('plot'),
+    guides:            $('guides'),
+    kpcLabels:         $('kpc-labels'),
     advanceIdeate:     $('advance-ideate'),
     backToRate:        $('back-to-rate'),
     ideaForm:          $('idea-form'),
     ideaText:          $('idea-text'),
     ideaKpcChips:      $('idea-kpc-chips'),
-    ideaTagCount:      $('idea-tag-count'),
+    ideaTargetBox:     $('idea-target-box'),
+    miniPlot:          $('mini-plot'),
+    miniLazyL:         $('mini-lazy-l'),
+    miniPins:          $('mini-pins'),
+    miniLabels:        $('mini-labels'),
+    miniGhosts:        $('mini-ghosts'),
     ideateCounter:     $('ideate-counter'),
     advanceShortlist:  $('advance-shortlist'),
     backToIdeate:      $('back-to-ideate'),
@@ -50,11 +57,56 @@
   var ideaTagBuffer = [];
 
   // Plot geometry — must match SVG viewBox / inner-rect in canvas.html.
-  var PLOT = { x0: 60, y0: 20, x1: 760, y1: 460 };
-  function satToX(s)   { return PLOT.x0 + clamp01(s) * (PLOT.x1 - PLOT.x0); }
-  function impToY(imp) { return PLOT.y0 + (1 - clamp01(imp)) * (PLOT.y1 - PLOT.y0); }
-  function xToSat(x)   { return clamp01((x - PLOT.x0) / (PLOT.x1 - PLOT.x0)); }
-  function clamp01(n)  { return Math.max(0, Math.min(1, n)); }
+  // Canonical Pelard layout: importance on X (left=high), satisfaction on Y
+  // (top=high). Each KPC sits in a fixed column (its rank); the user drags
+  // pins vertically to set satisfaction.
+  var PLOT = { x0: 80, y0: 40, x1: 720, y1: 360 };
+  var LABEL_BAND = { y0: 380, y1: 460 };
+  var PIN_R = 11;
+  // Vertical breathing room so the pin doesn't clip the plot top/bottom.
+  var Y_PAD = PIN_R + 4;
+
+  // X position is determined by rank index, not raw importance. Each KPC
+  // gets the center of its column.
+  function rankToX(i, total) {
+    var slotW = (PLOT.x1 - PLOT.x0) / Math.max(1, total);
+    return PLOT.x0 + (i + 0.5) * slotW;
+  }
+  function slotWidth(total) {
+    return (PLOT.x1 - PLOT.x0) / Math.max(1, total);
+  }
+  // Y position from satisfaction (1.0 = top, 0.0 = bottom), with pin-radius padding.
+  function satToY(s) {
+    return PLOT.y0 + Y_PAD + (1 - clamp01(s)) * (PLOT.y1 - PLOT.y0 - 2 * Y_PAD);
+  }
+  function yToSat(y) {
+    var lo = PLOT.y0 + Y_PAD, hi = PLOT.y1 - Y_PAD;
+    return clamp01((hi - y) / (hi - lo));
+  }
+  function clamp01(n) { return Math.max(0, Math.min(1, n)); }
+
+  // Mini-plot geometry — used by the read-only reference chart in phase 4.
+  var MINI_PLOT = { x0: 80, y0: 20, x1: 720, y1: 220 };
+  var MINI_PIN_R = 8;
+  var MINI_Y_PAD = MINI_PIN_R + 3;
+  function miniRankToX(i, total) {
+    var slotW = (MINI_PLOT.x1 - MINI_PLOT.x0) / Math.max(1, total);
+    return MINI_PLOT.x0 + (i + 0.5) * slotW;
+  }
+  function miniSatToY(s) {
+    return MINI_PLOT.y0 + MINI_Y_PAD + (1 - clamp01(s)) * (MINI_PLOT.y1 - MINI_PLOT.y0 - 2 * MINI_Y_PAD);
+  }
+
+  // Classify a KPC into a strategy zone based on importance and satisfaction.
+  // Used to color KPC chips in phase 4 by their strategic position.
+  function zoneOf(k) {
+    var hi = k.importance >= 0.5;
+    var sat = k.satisfaction >= 0.5;
+    if (hi && !sat) return 'front';   // high imp, low sat — strategic priority
+    if (!hi && sat) return 'top';     // low imp, high sat — over-served, donor
+    if (!hi && !sat) return 'back';   // low imp, low sat — back-burner
+    return 'core';                    // high imp, high sat — defending
+  }
 
   // ============================================================
   // phase 1 — KPC entry
@@ -167,9 +219,9 @@
     g.addEventListener('pointermove', function (e) {
       if (!rateDrag || rateDrag.id !== kpc.id) return;
       var pt = svgPoint(e);
-      var sat = xToSat(pt.x);
+      var sat = yToSat(pt.y);
       rateDrag.lastSat = sat;
-      moveBubble(g, sat, kpc.importance);
+      movePin(g, sat);
       redrawCurveLocal(kpc.id, sat);
     });
     g.addEventListener('pointerup', function (e) {
@@ -189,15 +241,24 @@
     });
   }
 
-  function moveBubble(g, sat, importance) {
-    var cx = satToX(sat);
-    var cy = impToY(importance);
-    var c = g.querySelector('circle');
-    if (c) { c.setAttribute('cx', cx); c.setAttribute('cy', cy); }
-    var letter = g.querySelector('text.letter');
-    if (letter) { letter.setAttribute('x', cx); letter.setAttribute('y', cy + 5); }
-    var label = g.querySelector('text.label');
-    if (label) { label.setAttribute('x', cx); label.setAttribute('y', cy + 36); }
+  // Move a single pin vertically (X is fixed by rank). Updates pin, letter,
+  // hit area, and the dashed guide line below the pin.
+  function movePin(g, sat) {
+    var cx = parseFloat(g.dataset.cx);
+    var cy = satToY(sat);
+    g.querySelectorAll('.kpc-pin, .pin-hit').forEach(function (c) {
+      c.setAttribute('cx', cx); c.setAttribute('cy', cy);
+    });
+    var pinLetter = g.querySelector('.kpc-pin-letter');
+    if (pinLetter) {
+      pinLetter.setAttribute('x', cx);
+      pinLetter.setAttribute('y', cy);
+    }
+    var guide = els.guides.querySelector('[data-id="' + g.dataset.id + '"]');
+    if (guide) {
+      guide.setAttribute('x1', cx); guide.setAttribute('y1', cy + PIN_R);
+      guide.setAttribute('x2', cx); guide.setAttribute('y2', LABEL_BAND.y0 - 4);
+    }
   }
 
   function svgPoint(evt) {
@@ -212,25 +273,31 @@
   function redrawCurveLocal(movingId, sat) {
     var state = window.companion.getState();
     if (!state) return;
-    var pts = state.kpcs.map(function (k) {
+    var n = state.kpcs.length;
+    var pts = state.kpcs.map(function (k, i) {
       var s = (k.id === movingId) ? sat : k.satisfaction;
-      return { x: satToX(s), y: impToY(k.importance) };
+      return { x: rankToX(i, n), y: satToY(s) };
     });
     els.lazyL.setAttribute('d', curvePath(pts));
   }
 
-  // Smoothed path: M to first, then quadratic-bezier through midpoints, T to last.
+  // Catmull-Rom spline rendered as cubic Béziers — interpolates THROUGH every point.
   function curvePath(pts) {
     if (!pts.length) return '';
     if (pts.length === 1) return 'M ' + pts[0].x + ' ' + pts[0].y;
+    if (pts.length === 2) return 'M ' + pts[0].x + ' ' + pts[0].y + ' L ' + pts[1].x + ' ' + pts[1].y;
     var d = 'M ' + pts[0].x + ' ' + pts[0].y;
-    for (var i = 1; i < pts.length - 1; i++) {
-      var p0 = pts[i], p1 = pts[i + 1];
-      var mx = (p0.x + p1.x) / 2, my = (p0.y + p1.y) / 2;
-      d += ' Q ' + p0.x + ' ' + p0.y + ' ' + mx + ' ' + my;
+    for (var i = 0; i < pts.length - 1; i++) {
+      var p0 = pts[i - 1] || pts[i];
+      var p1 = pts[i];
+      var p2 = pts[i + 1];
+      var p3 = pts[i + 2] || p2;
+      var c1x = p1.x + (p2.x - p0.x) / 6;
+      var c1y = p1.y + (p2.y - p0.y) / 6;
+      var c2x = p2.x - (p3.x - p1.x) / 6;
+      var c2y = p2.y - (p3.y - p1.y) / 6;
+      d += ' C ' + c1x + ' ' + c1y + ' ' + c2x + ' ' + c2y + ' ' + p2.x + ' ' + p2.y;
     }
-    var last = pts[pts.length - 1];
-    d += ' T ' + last.x + ' ' + last.y;
     return d;
   }
 
@@ -301,10 +368,74 @@
     renderEntry(state);
     renderRank(state);
     renderRate(state);
+    renderMiniPlot(state);
     renderIdeaForm(state);
     renderQuadrants(state);
     renderShortlist(state);
     renderDone(state);
+  }
+
+  // Read-only mini chart shown at the top of phase 4 — same Lazy-L as phase 3,
+  // but compact, with no drag and with ghost-pulses indicating which pins
+  // the in-progress idea would move.
+  function renderMiniPlot(state) {
+    if (!els.miniPlot) return;
+    els.miniPins.innerHTML = '';
+    els.miniGhosts.innerHTML = '';
+    var n = state.kpcs.length;
+    if (n === 0) return;
+
+    state.kpcs.forEach(function (k, i) {
+      var cx = miniRankToX(i, n);
+      var cy = miniSatToY(k.satisfaction);
+
+      var g = svgEl('g'); g.dataset.id = k.id;
+
+      var pin = svgEl('circle');
+      pin.classList.add('mini-pin');
+      pin.dataset.id = k.id;
+      pin.setAttribute('cx', cx); pin.setAttribute('cy', cy);
+      pin.setAttribute('r', MINI_PIN_R);
+
+      var letter = svgEl('text');
+      letter.classList.add('mini-pin-letter');
+      letter.setAttribute('x', cx); letter.setAttribute('y', cy);
+      letter.setAttribute('text-anchor', 'middle');
+      letter.setAttribute('dominant-baseline', 'central');
+      letter.textContent = k.letter;
+
+      g.append(pin, letter);
+      els.miniPins.appendChild(g);
+    });
+
+    var pts = state.kpcs.map(function (k, i) {
+      return { x: miniRankToX(i, n), y: miniSatToY(k.satisfaction) };
+    });
+    els.miniLazyL.setAttribute('d', curvePath(pts));
+
+    refreshMiniGhosts(state);
+  }
+
+  // Add/remove ghost-pulse rings on mini-plot pins for currently tagged KPCs.
+  function refreshMiniGhosts(state) {
+    if (!els.miniGhosts) return;
+    els.miniGhosts.innerHTML = '';
+    if (!state) return;
+    var n = state.kpcs.length;
+    state.kpcs.forEach(function (k, i) {
+      var pin = els.miniPins.querySelector('.mini-pin[data-id="' + k.id + '"]');
+      if (!pin) return;
+      var tagged = ideaTagBuffer.indexOf(k.id) >= 0;
+      pin.classList.toggle('tagged', tagged);
+      if (tagged) {
+        var pulse = svgEl('circle');
+        pulse.classList.add('mini-pulse');
+        pulse.setAttribute('cx', miniRankToX(i, n));
+        pulse.setAttribute('cy', miniSatToY(k.satisfaction));
+        pulse.setAttribute('r', 8);
+        els.miniGhosts.appendChild(pulse);
+      }
+    });
   }
 
   function showPhase(phase) {
@@ -356,36 +487,70 @@
   function renderRate(state) {
     if (rateDrag) return;  // mid-drag — keep local feedback
     els.bubbles.innerHTML = '';
-    state.kpcs.forEach(function (k) {
-      var g = svgEl('g'); g.classList.add('bubble'); g.dataset.id = k.id;
-      var cx = satToX(k.satisfaction), cy = impToY(k.importance);
+    els.guides.innerHTML = '';
+    els.kpcLabels.innerHTML = '';
+    var n = state.kpcs.length;
+    var slotW = slotWidth(n);
+
+    state.kpcs.forEach(function (k, i) {
+      var cx = rankToX(i, n);
+      var cy = satToY(k.satisfaction);
+
+      // Vertical dashed guide from pin down to its name label
+      var guide = svgEl('line');
+      guide.classList.add('pin-guide');
+      guide.dataset.id = k.id;
+      guide.setAttribute('x1', cx); guide.setAttribute('y1', cy + PIN_R);
+      guide.setAttribute('x2', cx); guide.setAttribute('y2', LABEL_BAND.y0 - 4);
+      els.guides.appendChild(guide);
+
+      // Pin group (hit area + visible pin + letter)
+      var g = svgEl('g'); g.classList.add('kpc-card'); g.dataset.id = k.id;
+      g.dataset.cx = cx;
 
       var hit = svgEl('circle');
-      hit.setAttribute('cx', cx); hit.setAttribute('cy', cy); hit.setAttribute('r', 24);
-      hit.setAttribute('fill', 'transparent'); hit.setAttribute('pointer-events', 'all');
+      hit.classList.add('pin-hit');
+      hit.setAttribute('cx', cx); hit.setAttribute('cy', cy);
+      hit.setAttribute('r', PIN_R + 12);
 
-      var c = svgEl('circle');
-      c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', 18);
+      var pin = svgEl('circle');
+      pin.classList.add('kpc-pin');
+      pin.setAttribute('cx', cx); pin.setAttribute('cy', cy);
+      pin.setAttribute('r', PIN_R);
 
-      var letter = svgEl('text');
-      letter.setAttribute('x', cx); letter.setAttribute('y', cy + 5);
-      letter.setAttribute('text-anchor', 'middle');
-      letter.classList.add('letter');
-      letter.textContent = k.letter;
+      var pinLetter = svgEl('text');
+      pinLetter.classList.add('kpc-pin-letter');
+      pinLetter.setAttribute('x', cx); pinLetter.setAttribute('y', cy);
+      pinLetter.setAttribute('text-anchor', 'middle');
+      pinLetter.setAttribute('dominant-baseline', 'central');
+      pinLetter.textContent = k.letter;
 
-      var label = svgEl('text');
-      label.setAttribute('x', cx); label.setAttribute('y', cy + 36);
-      label.setAttribute('text-anchor', 'middle');
-      label.classList.add('label');
-      label.textContent = k.label;
-
-      g.append(hit, c, letter, label);
+      g.append(hit, pin, pinLetter);
       attachBubbleDrag(g, k);
       els.bubbles.appendChild(g);
+
+      // KPC name label below the X axis (foreignObject for HTML wrapping)
+      var fo = svgEl('foreignObject');
+      fo.setAttribute('x', cx - slotW / 2);
+      fo.setAttribute('y', LABEL_BAND.y0);
+      fo.setAttribute('width', slotW);
+      fo.setAttribute('height', LABEL_BAND.y1 - LABEL_BAND.y0);
+      fo.setAttribute('pointer-events', 'none');
+
+      var nameDiv = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
+      nameDiv.className = 'kpc-name';
+      var ltSpan = document.createElementNS('http://www.w3.org/1999/xhtml', 'span');
+      ltSpan.className = 'lt';
+      ltSpan.textContent = k.letter;
+      nameDiv.appendChild(ltSpan);
+      nameDiv.appendChild(document.createTextNode(k.label));
+      fo.appendChild(nameDiv);
+      els.kpcLabels.appendChild(fo);
     });
 
-    var pts = state.kpcs.map(function (k) {
-      return { x: satToX(k.satisfaction), y: impToY(k.importance) };
+    // Lazy-L curve through all pins, in rank order (left → right)
+    var pts = state.kpcs.map(function (k, i) {
+      return { x: rankToX(i, n), y: satToY(k.satisfaction) };
     });
     els.lazyL.setAttribute('d', curvePath(pts));
   }
@@ -402,20 +567,35 @@
       chip.type = 'button';
       chip.className = 'kpc-chip' + (ideaTagBuffer.indexOf(k.id) >= 0 ? ' selected' : '');
       chip.dataset.id = k.id;
+      chip.dataset.zone = zoneOf(k);
+      var zone = document.createElement('span'); zone.className = 'ck-zone';
       var letter = el('span', 'ck-letter', k.letter);
       var lab = document.createElement('span'); lab.textContent = k.label;
-      chip.append(letter, lab);
+      chip.append(zone, letter, lab);
       chip.addEventListener('click', function () { toggleIdeaTag(k.id); });
       els.ideaKpcChips.appendChild(chip);
     });
 
-    var n = ideaTagBuffer.length;
-    els.ideaTagCount.textContent = n === 0 ? 'Pick at least 1 KPC' :
-      n + (n === 1 ? ' KPC selected → 1-Post-it' :
-           n === 2 ? ' KPCs selected → 2-Post-its' :
-           n === 3 ? ' KPCs selected → 3-Post-its' :
-                     ' KPCs selected → 4+-Post-its');
+    updateIdeaTargetBox(state);
+    refreshMiniGhosts(state);
     updateIdeaSubmitState();
+  }
+
+  // Live indicator showing which Box the in-progress idea will file into.
+  function updateIdeaTargetBox(state) {
+    if (!els.ideaTargetBox) return;
+    var n = ideaTagBuffer.length;
+    var clampedN = Math.min(4, n);
+    var box = els.ideaTargetBox;
+    box.dataset.n = String(clampedN);
+    var label = box.querySelector('.target-value');
+    if (label) {
+      if (n === 0) label.textContent = 'Tag a pin to start';
+      else if (n === 1) label.textContent = 'Box 01 · single-pin move';
+      else if (n === 2) label.textContent = 'Box 02 · trade-off';
+      else if (n === 3) label.textContent = 'Box 03 · combination';
+      else label.textContent = 'Box 04+ · transformative';
+    }
   }
 
   function renderQuadrants(state) {
@@ -437,19 +617,31 @@
   function makeIdeaListItem(idea, state) {
     var li = document.createElement('li');
     li.dataset.id = idea.id;
+
     var text = el('span', 'text', idea.text);
-    var letters = idea.linkedKpcs.map(function (id) {
+
+    var tags = document.createElement('span'); tags.className = 'tags';
+    idea.linkedKpcs.slice().sort(function (a, b) {
+      var ka = state.kpcs.find(function (k) { return k.id === a; });
+      var kb = state.kpcs.find(function (k) { return k.id === b; });
+      return (ka ? ka.letter : 'Z').localeCompare(kb ? kb.letter : 'Z');
+    }).forEach(function (id) {
       var k = state.kpcs.find(function (k) { return k.id === id; });
-      return k ? k.letter : '?';
-    }).sort().join(' ');
-    var tags = el('span', 'tags', letters);
+      var t = document.createElement('span'); t.className = 'tag';
+      t.textContent = k ? k.letter : '?';
+      tags.appendChild(t);
+    });
+
+    var controls = document.createElement('div'); controls.className = 'controls';
     var rm = document.createElement('button');
     rm.className = 'remove'; rm.type = 'button'; rm.title = 'Remove';
     rm.textContent = '×';
     rm.addEventListener('click', function () {
       window.companion.pushEvent('idea.remove', { id: idea.id });
     });
-    li.append(text, tags, rm);
+    controls.appendChild(rm);
+
+    li.append(text, tags, controls);
     return li;
   }
 
